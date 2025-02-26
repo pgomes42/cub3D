@@ -6,14 +6,14 @@
 /*   By: pgomes <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 09:58:45 by pgomes            #+#    #+#             */
-/*   Updated: 2025/02/12 10:06:48 by pgomes           ###   ########.fr       */
+/*   Updated: 2025/02/26 11:18:47 by pgomes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 
-void render(t_game *data) 
+int ft_draw(t_game *data) 
 {
     int x;
     int y;
@@ -21,7 +21,7 @@ void render(t_game *data)
     data->width = W_WIDTH;
     data->height = W_HEIGHT;
     data->image->img = mlx_new_image(data->mlx, data->width, data->height);
-    data->image->addr = mlx_get_data_addr(data->image->img, &data->image->pixel_bits, &data->image->size_line, &data->image->endian);
+    data->image->addr =(int  *) mlx_get_data_addr(data->image->img, &data->image->pixel_bits, &data->image->size_line, &data->image->endian);
     y =-1;
     while ( ++y < data->height)
     {
@@ -29,12 +29,13 @@ void render(t_game *data)
         while (++x < data->width)
         {
             if (y < data->height / 2) 
-                put_pixel_to_image(data, x, y, data->image->ceiling_color);
+                put_pixel_to_image(data, x, y, data->ceiling_color);
             else 
-                put_pixel_to_image(data, x, y, data->image->floor_color);
+                put_pixel_to_image(data, x, y, data->floor_color);
         }
     }
     mlx_put_image_to_window(data->mlx, data->win, data->image->img, 0, 0);
+    return (1);
 }
 
 int init_windows(t_game *game)
@@ -48,10 +49,10 @@ int init_windows(t_game *game)
     game->win = mlx_new_window(game->mlx, W_WIDTH, W_HEIGHT, "Cub3D");
     if (!game->win)
         return  (printf("Error\nFalied to creat windows\n"), 0);
-
-    render(game);
-    mlx_hook(game->win, 17, 0, ft_clean_game, game); 
-    mlx_hook(game->win, 2, 1L, event_key, game);
-    mlx_loop(game->mlx);  
+    mlx_loop_hook(game->mlx, &ft_draw, game);
+    mlx_hook(game->win, 17, 0, ft_clean_game, game);
+    mlx_hook(game->win, KeyPress, KeyPressMask, key_press_handler, game); 
+    mlx_hook(game->win, KeyRelease, KeyReleaseMask, event_key, game);
+	mlx_loop(game->mlx);  
     return (1);     
 }

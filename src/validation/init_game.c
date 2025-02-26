@@ -6,7 +6,7 @@
 /*   By: pgomes <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 10:12:42 by pgomes            #+#    #+#             */
-/*   Updated: 2025/02/11 12:12:10 by pgomes           ###   ########.fr       */
+/*   Updated: 2025/02/26 11:54:06 by pgomes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static void init_minimalist_map(t_map *map, int i)
     
     height = 0;
     tmp = map->map;
-    map->minimalist = (char **)malloc(sizeof(char *) * (map->map_height - 4));
+    map->minimalist = (char **)malloc(sizeof(char *) * (map->height - 4));
     while (tmp && tmp[i] && ft_line_empty(tmp[i]))
         i++;
-    while (tmp && tmp[i] && i < map->map_height)
+    while (tmp && tmp[i] && i < map->height)
     {
         if (!ft_line_empty(tmp[i]))
             tmp[i][ft_strlen(tmp[i]) - 1] = '\0';
@@ -32,7 +32,7 @@ static void init_minimalist_map(t_map *map, int i)
     }
     map->minimalist[height] = NULL;
     ft_clean_matrix(tmp);
-    map->map_height = height;
+    map->height = height;
 }
 
 static int  add_line(t_map *gameMap, char *line)
@@ -43,10 +43,10 @@ static int  add_line(t_map *gameMap, char *line)
     i = 0;
     if (!line)
         return (0);
-    tmp = (char **)malloc(sizeof(char *) * (gameMap->map_height + 2));
+    tmp = (char **)malloc(sizeof(char *) * (gameMap->height + 2));
     if (!tmp)
         return (0);
-    while (i < gameMap->map_height)
+    while (i < gameMap->height)
     {
         tmp[i] = gameMap->map[i];
         i++;
@@ -56,7 +56,7 @@ static int  add_line(t_map *gameMap, char *line)
     if (gameMap->map)
         free(gameMap->map);
     gameMap->map = tmp;
-    gameMap->map_height++;
+    gameMap->height++;
     return (1);
 }
 
@@ -94,7 +94,8 @@ static int    init_map(t_game *game, char *file)
     char    *line;
     int     fd;
     int     i;
-          
+    
+    game->map->height = 0;
     if (ft_strncmp(&file[ft_strlen(file) - 4], ".cub", 4) != 0)
         return (perror("Error\nInvalid file extension\n"), 0);
     fd = open(file, O_RDONLY);
@@ -117,8 +118,7 @@ static int    init_map(t_game *game, char *file)
 
 void    init_args(t_game *game, char *file)
 {
-    game->map = (t_map *)malloc(sizeof(t_map));
-    ft_memset(game->map, 0, sizeof(t_map)); 
+    game->map = ft_calloc(1, sizeof(t_map));
     if (init_map(game, file))
         validate_map(game);
 }

@@ -6,7 +6,7 @@
 /*   By: pgomes <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 10:30:09 by pgomes            #+#    #+#             */
-/*   Updated: 2025/02/11 15:08:21 by pgomes           ###   ########.fr       */
+/*   Updated: 2025/02/26 11:42:04 by pgomes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void    ft_clean_matrix(char **matrix)
 }
 void    ft_clean_map(t_map *map)
 {
-    ft_clean_matrix(map->reverter_map);
+    ft_clean_matrix(map->aux_map);
     ft_clean_matrix(map->minimalist);
     if (map->no_texture)
         free(map->no_texture);
@@ -42,16 +42,16 @@ void    ft_clean_map(t_map *map)
 
 void ft_clean_texture(t_game *game)
 {
-    if (game->s_wall)
-        mlx_destroy_image(game->mlx, game->s_wall);
-    if (game->n_wall)
-        mlx_destroy_image(game->mlx, game->n_wall);
-    if (game->e_wall)
-        mlx_destroy_image(game->mlx, game->e_wall);
-    if (game->w_wall)
-        mlx_destroy_image(game->mlx, game->w_wall);
-    if(game->texture)
-        free(game->texture);
+    if (game->s_wall.img)
+        mlx_destroy_image(game->mlx, game->s_wall.img);
+    if (game->n_wall.img)
+        mlx_destroy_image(game->mlx, game->n_wall.img);
+    if (game->e_wall.img)
+        mlx_destroy_image(game->mlx, game->e_wall.img);
+    if (game->w_wall.img)
+        mlx_destroy_image(game->mlx, game->w_wall.img);
+    //if(game->texture)
+      //  free(game->texture);
 }
 
 int    ft_clean_game(t_game *game)
@@ -59,7 +59,7 @@ int    ft_clean_game(t_game *game)
    
     if (game->mlx)
         mlx_destroy_window(game->mlx, game->win);
-    mlx_destroy_image(game->mlx, game->img);
+    //mlx_destroy_image(game->mlx, game->img);
     ft_clean_texture(game);
     mlx_destroy_display(game->mlx);
     free(game->mlx);

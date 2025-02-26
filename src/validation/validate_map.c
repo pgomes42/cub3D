@@ -6,7 +6,7 @@
 /*   By: pgomes <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 09:57:46 by pgomes            #+#    #+#             */
-/*   Updated: 2025/02/11 14:19:52 by pgomes           ###   ########.fr       */
+/*   Updated: 2025/02/26 11:59:59 by pgomes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,17 +111,17 @@ static int validate_elements(t_map *map)
 int     validate_map(t_game *game)
 {
     if (validate_texture(game->map)
-    && verif_wall(game->map->minimalist, game->map->map_height)
+    && verif_wall(game->map->minimalist, game->map->height)
     && traspost_matriz(game->map)
-    && verif_wall(game->map->reverter_map, game->map->map_rev_height)
+    && verif_wall(game->map->aux_map, game->map->width)
     && validate_elements(game->map) && count_player(game->map))
     {
+        if (game->map->minimalist[0])
+            printf("Valid map\n");
         ft_init_player(game);
-        game->texture = malloc(sizeof(t_texture));
-        game->texture->floor_color = ft_get_color(game->map->floor_color);
-        game->texture->ceiling_color = ft_get_color(game->map->ceiling_color);
-         return  (1);
-        
+        game->floor_color = ft_get_color(game->map->floor_color);
+        game->ceiling_color = ft_get_color(game->map->ceiling_color);
+        return  (1);
     }  
     return (0);   
 }

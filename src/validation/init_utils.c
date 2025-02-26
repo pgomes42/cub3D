@@ -6,7 +6,7 @@
 /*   By: pgomes <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:55:50 by pgomes            #+#    #+#             */
-/*   Updated: 2025/02/11 13:16:03 by pgomes           ###   ########.fr       */
+/*   Updated: 2025/02/26 12:01:50 by pgomes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void ft_init_player(t_game *game)
     i = -1;
     while (game->map->minimalist[++i])
     {
+        printf("line %d\n", i);
         j = -1;
         while (game->map->minimalist[i][++j])
         {

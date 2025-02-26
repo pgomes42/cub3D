@@ -6,7 +6,7 @@
 /*   By: pgomes <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 08:48:25 by pgomes            #+#    #+#             */
-/*   Updated: 2025/02/11 14:19:52 by pgomes           ###   ########.fr       */
+/*   Updated: 2025/02/25 10:59:15 by pgomes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,25 +58,25 @@ int    traspost_matriz(t_map *map)
     int i;
     int j;
     
-    map->map_rev_height = bigger_size_line(map); 
-    map->reverter_map = (char **)malloc(sizeof(char *) * (map->map_rev_height + 1));
-    map->reverter_map[map->map_rev_height] = NULL;
+    map->width = bigger_size_line(map); 
+    map->aux_map = (char **)malloc(sizeof(char *) * (map->width + 1));
+    map->aux_map[map->width] = NULL;
     i = -1;
-    while(++i < map->map_rev_height)
+    while(++i < map->width)
     {
-        map->reverter_map[i] = (char *)malloc(sizeof(char) * (map->map_height + 1));
-        map->reverter_map[i][map->map_height] = '\0';
+        map->aux_map[i] = (char *)malloc(sizeof(char) * (map->height + 1));
+        map->aux_map[i][map->height] = '\0';
     }
        i = -1;  
-   while( ++i < map->map_height)
+   while( ++i < map->height)
     {
         j = -1;
-        while(++j < map->map_rev_height)
+        while(++j < map->width)
         {
             if(j < (int)ft_strlen(map->minimalist[i]))
-                map->reverter_map[j][i] = map->minimalist[i][j];
+                map->aux_map[j][i] = map->minimalist[i][j];
             else
-                map->reverter_map[j][i] = ' ';
+                map->aux_map[j][i] = ' ';
         }       
     }
     return (1);    
