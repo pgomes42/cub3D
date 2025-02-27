@@ -6,11 +6,32 @@
 /*   By: pgomes <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:40:40 by alexa             #+#    #+#             */
-/*   Updated: 2025/02/25 11:27:07 by pgomes           ###   ########.fr       */
+/*   Updated: 2025/02/27 11:13:16 by pgomes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	init_ray(t_raycst *ray)
+{
+	ray->camera_x = 0;
+	ray->dir_x = 0;
+	ray->dir_y = 0;
+	ray->map_x = 0;
+	ray->map_y = 0;
+	ray->step_x = 0;
+	ray->step_y = 0;
+	ray->sidedist_x = 0;
+	ray->sidedist_y = 0;
+	ray->deltadist_x = 0;
+	ray->deltadist_y = 0;
+	ray->wall_dist = 0;
+	ray->wall_x = 0;
+	ray->side = 0;
+	ray->line_height = 0;
+	ray->draw_start = 0;
+	ray->draw_end = 0;
+}
 
 static void	init_raycasting_info(int x, t_raycst *ray, t_player *player)
 {
@@ -78,7 +99,7 @@ static void	perform_dda(t_game *data, t_raycst *ray)
 	}
 }
 
-static void	calculate_line_height(t_raycst *ray, t_game *data, t_player *player)
+static void	calculate_line_height(t_raycst *ray, t_player *player)
 {
     int win_height;
 
@@ -101,7 +122,7 @@ static void	calculate_line_height(t_raycst *ray, t_game *data, t_player *player)
 	ray->wall_x -= floor(ray->wall_x);
 }
 
-int	raycasting(t_player *player, t_game *data)
+int	raycasting( t_game *data)
 {
 	t_raycst	*ray;
 	int		x;
@@ -110,10 +131,10 @@ int	raycasting(t_player *player, t_game *data)
 	ray = data->ray;
 	while (x < W_WIDTH)
 	{
-		init_raycasting_info(x, ray, player);
-		set_dda(ray, player);
+		init_raycasting_info(x, ray, data->player);
+		set_dda(ray, data->player);
 		perform_dda(data, ray);
-		calculate_line_height(ray, data, player);
+		calculate_line_height(ray,data->player);
 		update_texture_pixels(data, ray, x);
 		x++;
 	}

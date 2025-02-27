@@ -6,22 +6,29 @@
 /*   By: pgomes <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:55:50 by pgomes            #+#    #+#             */
-/*   Updated: 2025/02/26 12:01:50 by pgomes           ###   ########.fr       */
+/*   Updated: 2025/02/27 12:09:44 by pgomes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+static void    ft_init_player_continue(t_player *player)
+{
+    player->dir_y = 0;
+    player->dir_x = 0;
+    player->plane_x = 0;
+    player->plane_y = 0.66;
+    player->move_speed = 0.05;
+    player->rot_speed = 0.05;
+}
 void ft_init_player(t_game *game)
 {
     int i;
     int j;
 
-    game->player = (t_player *)malloc(sizeof(t_player));
     i = -1;
     while (game->map->minimalist[++i])
     {
-        printf("line %d\n", i);
         j = -1;
         while (game->map->minimalist[i][++j])
         {
@@ -29,6 +36,7 @@ void ft_init_player(t_game *game)
             {
                 game->player->pos_x = j + 0.5;
                 game->player->pos_y = i + 0.5;
+                ft_init_player_continue(game->player);
                 if (game->map->minimalist[i][j] == 'N')
                     game->player->dir_y = -1;
                 else if (game->map->minimalist[i][j] == 'S')

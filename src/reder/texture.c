@@ -6,7 +6,7 @@
 /*   By: pgomes <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 15:34:27 by pgomes            #+#    #+#             */
-/*   Updated: 2025/02/26 11:37:57 by pgomes           ###   ########.fr       */
+/*   Updated: 2025/02/26 16:19:23 by pgomes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void    load_addr_texture(t_texture *tex)
 {
     tex->height = TILE_SIZE;
     tex->width = TILE_SIZE;
-    tex->addr = (int *)mlx_get_data_addr(tex->img, &tex->pixel_bits, &tex->size_line, &tex->endian);
+    tex->addr = (char  *)mlx_get_data_addr(tex->img, &tex->pixel_bits, &tex->size_line, &tex->endian);
 }
 
 int init_textures(t_game *game)
@@ -89,6 +89,6 @@ void update_texture_pixels(t_game *game, t_raycst *ray, int x)
     {
         tex->tex_y = (y * 2 - W_HEIGHT + ray->line_height) * (tex->height / 2) / ray->line_height;
         color = get_texture_pixel(tex, tex->tex_x, tex->tex_y);
-        put_pixel_to_image(tex, x, y, color);
+        put_pixel_to_image(&game->image, x, y, color);
     }
 }

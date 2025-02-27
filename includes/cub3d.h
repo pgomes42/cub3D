@@ -6,7 +6,7 @@
 /*   By: pgomes <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 09:45:06 by pgomes            #+#    #+#             */
-/*   Updated: 2025/02/26 11:38:35 by pgomes           ###   ########.fr       */
+/*   Updated: 2025/02/27 12:11:06 by pgomes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <X11/X.h>
 # define W_WIDTH 1080
 # define W_HEIGHT 900
-# define TILE_SIZE 65
+# define TILE_SIZE 64
 # define MOVESPEED 0.05
 # define ROTSPEED 0.05
 
@@ -56,6 +56,8 @@ typedef struct s_player
 	double	plane_x;
 	double	plane_y;
 	int		has_moved;
+    int		move_speed;
+    int		rot_speed;
 	int		move_x;
 	int		move_y;
 	int		rotate;
@@ -87,7 +89,7 @@ typedef struct s_raycast
 typedef struct s_texture
 {
     void		*img;
-    int		    *addr;
+    char		    *addr;
     int		    pixel_bits;
     int		    size_line;
     int		    endian;
@@ -114,8 +116,8 @@ typedef struct s_game
     int         height;
     int         line_height;
     t_raycst	*ray;
-    t_texture	*image;
-    t_map	*map;
+    t_texture	image;
+    t_map	    *map;
     t_player	*player;
 }				t_game;
 
@@ -139,11 +141,12 @@ int	key_press_handler(int key, t_game *game);
 int	move_player(t_game *data);
 int	validate_move(t_game *data, double new_x, double new_y);
 void	init_player_direction(t_player *player);
-int	raycasting(t_player *player, t_game *data);
+int	raycasting( t_game *data);
 int ft_draw(t_game *data);
 int init_windows(t_game *game);
 int get_texture_pixel(t_texture *tex, int x, int y);
 int init_textures(t_game *game);
 void put_pixel_to_image(t_texture *data, int x, int y, int color);
+void update_texture_pixels(t_game *game, t_raycst *ray, int x);
 
 #endif

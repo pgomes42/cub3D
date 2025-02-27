@@ -6,7 +6,7 @@
 /*   By: pgomes <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 10:24:14 by pgomes            #+#    #+#             */
-/*   Updated: 2025/02/26 10:51:32 by pgomes           ###   ########.fr       */
+/*   Updated: 2025/02/27 10:40:01 by pgomes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,27 @@ int	validate_move(t_game *data, double new_x, double new_y)
 		moved = 1;
 	}
 	return (moved);
+}
+
+void	ft_update_player(int px, int py, t_texture *img)
+{
+	float	y;
+	float	x;
+	int		size;
+
+	
+	size = PLAYER_SIZE;
+	y = 0;
+	while (y < size && y + py < HEIGHT)
+	{
+		x = 0;
+		while (x < size && x + px < WIDTH)
+		{
+			if (x > 0 && y > 0)
+				my_pixel_put(img, x + px - PLAYER_SIZE / 2,
+					y + py - PLAYER_SIZE / 2, 0x0000F0);
+			x++;
+		}
+		y++;
+	}
 }

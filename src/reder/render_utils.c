@@ -6,7 +6,7 @@
 /*   By: pgomes <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:58:59 by pgomes            #+#    #+#             */
-/*   Updated: 2025/02/26 11:23:28 by pgomes           ###   ########.fr       */
+/*   Updated: 2025/02/26 16:19:35 by pgomes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,10 @@
 
 void put_pixel_to_image(t_texture *image, int x, int y, int color)
 {     
-    int *dst;
-    /*
-    dst =(int *)(y * image->size_line + x * (image->pixel_bits / 8));
-    *(unsigned int *)dst = color;
-    char *dst;*/
-
+    char *dst;
+    
     dst = image->addr + (y * image->size_line + x * (image->pixel_bits / 8));
-    *(unsigned int *)dst = color;
+     *(unsigned int *)dst = color;
 }
 
 int get_texture_pixel(t_texture *tex, int x, int y)

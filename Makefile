@@ -6,7 +6,7 @@
 #    By: pgomes <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/21 09:44:09 by pgomes            #+#    #+#              #
-#    Updated: 2025/02/11 13:16:50 by pgomes           ###   ########.fr        #
+#    Updated: 2025/02/26 16:20:21 by pgomes           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS      			=	src/cub3d.c\
 						src/events/key_listener.c\
 						src/reder/render.c\
 						src/reder/render_utils.c\
+						src/raycast/raycasting.c\
 						src/reder/texture.c\
 						src/garbager_colletor.c\
 						src/validation/validate_map.c\
@@ -55,7 +56,7 @@ clean:
 	@echo "$(RED)Deleting $(CYAN)$(NAME) ${CLR_RMV}objs ✔️"
 
 fclean: clean
-	@${RM} ${NAME} ${NAME_B}
+	@${RM} ${NAME}
 	@make fclean -C $(LIBFT_PATH)
 	@make fclean -C $(MLX_PATH)
 	@echo "$(RED)Deleting $(CYAN)$(NAME) ${CLR_RMV}binary ✔️"

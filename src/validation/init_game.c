@@ -6,7 +6,7 @@
 /*   By: pgomes <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 10:12:42 by pgomes            #+#    #+#             */
-/*   Updated: 2025/02/26 11:54:06 by pgomes           ###   ########.fr       */
+/*   Updated: 2025/02/26 15:47:53 by pgomes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ static void init_obj_map(t_game *game, char **line, int *i)
             game->map->we_texture = ft_strdup(&line[*i][3]);
         else if (ft_strncmp(line[*i], "EA", 2) == 0)
             game->map->ea_texture = ft_strdup(&line[*i][3]);
-        else if (ft_strncmp(line[*i], "F", 1) == 0)
-            game->map->ceiling_color = ft_strdup(&line[*i][2]);
         else if (ft_strncmp(line[*i], "C", 1) == 0)
+            game->map->ceiling_color = ft_strdup(&line[*i][2]);
+        else if (ft_strncmp(line[*i], "F", 1) == 0)
             game->map->floor_color = ft_strdup(&line[*i][2]);
     }
 }
