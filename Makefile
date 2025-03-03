@@ -6,7 +6,7 @@
 #    By: pgomes <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/21 09:44:09 by pgomes            #+#    #+#              #
-#    Updated: 2025/02/26 16:20:21 by pgomes           ###   ########.fr        #
+#    Updated: 2025/03/03 10:25:01 by pgomes           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,12 @@ SRCS      			=	src/cub3d.c\
 						src/events/key_listener.c\
 						src/reder/render.c\
 						src/reder/render_utils.c\
-						src/raycast/raycasting.c\
+						src/raycast/raycast_utils.c\
+						src/raycast/raycast.c\
 						src/reder/texture.c\
+						src/moviment/move_player.c\
+						src/moviment/moved_utils.c\
+						src/moviment/player_dir.c\
 						src/garbager_colletor.c\
 						src/validation/validate_map.c\
 						src/validation/validate_utils.c\
@@ -57,8 +61,7 @@ clean:
 
 fclean: clean
 	@${RM} ${NAME}
-	@make fclean -C $(LIBFT_PATH)
-	@make fclean -C $(MLX_PATH)
+	@make clean -C $(LIBFT_PATH)
 	@echo "$(RED)Deleting $(CYAN)$(NAME) ${CLR_RMV}binary ✔️"
 
 re: fclean all

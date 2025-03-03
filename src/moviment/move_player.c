@@ -6,7 +6,7 @@
 /*   By: pgomes <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:13:43 by pgomes            #+#    #+#             */
-/*   Updated: 2025/02/26 11:03:44 by pgomes           ###   ########.fr       */
+/*   Updated: 2025/03/03 11:02:37 by pgomes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
+/*/
 static int	rotate_left_right(t_player *player, double rotspeed)
 {
 	double		tmp_x;
@@ -38,7 +38,7 @@ static int	rotate_left_right(t_player *player, double rotspeed)
 	player->plane_y = tmp_x * sin(rotspeed) + player->plane_y * cos(rotspeed);
 	return (1);
 }
-
+/
 static int	rotate_player(t_game *data, double rotdir)
 {
 	int		moved;
@@ -49,7 +49,7 @@ static int	rotate_player(t_game *data, double rotdir)
 	moved += rotate_left_right(data->player, rotspeed);
 	return (moved);
 }
-
+/
 int	move_player(t_game *data)
 {
 	int	moved;
@@ -76,3 +76,4 @@ int	move_player(t_game *data)
 		moved += rotate_player(data, data->player->rotate);
 	return (moved);
 }
+*/

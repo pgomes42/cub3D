@@ -6,7 +6,7 @@
 /*   By: pgomes <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 09:57:46 by pgomes            #+#    #+#             */
-/*   Updated: 2025/02/27 12:04:55 by pgomes           ###   ########.fr       */
+/*   Updated: 2025/03/03 11:33:37 by pgomes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,9 @@ int     validate_map(t_game *game)
         if (game->map->minimalist[0])
             printf("Valid map\n");
         game->player = (t_player *)malloc(sizeof(t_player));
-        ft_init_player(game);
+        game->player->player_angle = ft_init_player(game);
+	    game->player->player_delta_x = cos(game->player->player_angle) * 7;
+	    game->player->player_delta_y = sin(game->player->player_angle) * 7;
         game->floor_color = ft_get_color(game->map->floor_color);
         game->ceiling_color = ft_get_color(game->map->ceiling_color);
         return  (1);

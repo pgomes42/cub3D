@@ -6,22 +6,13 @@
 /*   By: pgomes <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:55:50 by pgomes            #+#    #+#             */
-/*   Updated: 2025/02/27 12:09:44 by pgomes           ###   ########.fr       */
+/*   Updated: 2025/03/03 11:31:20 by pgomes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void    ft_init_player_continue(t_player *player)
-{
-    player->dir_y = 0;
-    player->dir_x = 0;
-    player->plane_x = 0;
-    player->plane_y = 0.66;
-    player->move_speed = 0.05;
-    player->rot_speed = 0.05;
-}
-void ft_init_player(t_game *game)
+double ft_init_player(t_game *game)
 {
     int i;
     int j;
@@ -34,20 +25,18 @@ void ft_init_player(t_game *game)
         {
             if (ft_isplayer(game->map->minimalist[i][j]))
             {
-                game->player->pos_x = j + 0.5;
-                game->player->pos_y = i + 0.5;
-                ft_init_player_continue(game->player);
-                if (game->map->minimalist[i][j] == 'N')
-                    game->player->dir_y = -1;
-                else if (game->map->minimalist[i][j] == 'S')
-                    game->player->dir_y = 1;
+                game->player->pos_x = (float) j * SQUARE + PLAYER_SIZE;
+                game->player->pos_y = (float) i * SQUARE + PLAYER_SIZE;
+               if (game->map->minimalist[i][j] == 'S')
+                    return (P2);
+                else if (game->map->minimalist[i][j] == 'N')
+                   return (P3);
                 else if (game->map->minimalist[i][j] == 'W')
-                    game->player->dir_x = -1;
-                else if (game->map->minimalist[i][j] == 'E')
-                    game->player->dir_x = 1;
+                   return (PI );
             }
         }
     }
+    return (0);
 }
 
 int   ft_line_empty(char *line)
